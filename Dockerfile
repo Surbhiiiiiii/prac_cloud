@@ -5,6 +5,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy the JavaScript file into the container
+COPY package.json ./
 COPY app.js .
 
 # Command to run the script
