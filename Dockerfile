@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy the JavaScript file into the container
 COPY package.json ./
 COPY app.js .
+COPY . .
 
 # Command to run the script
 CMD ["node", "app.js"]
