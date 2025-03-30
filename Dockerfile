@@ -51,18 +51,15 @@ CMD ["node", "app.js"]
 #         }
 #         stage('Deploy on AWS EC2') {
 #             steps {
-#                 sshagent(['ec2-key']) {
+#                 sshagent(credentials: ['ec2-key']) {
 #                     sh '''
-#                     ssh -o StrictHostKeyChecking=no ubuntu@35.93.98.4 <<EOF
-#                     docker login -u surbhi800 -p "$DOCKER_PASS"
-#                     docker pull surbhi800/my-node-app:latest
+#                    ssh -o StrictHostKeyChecking=no ubuntu@35.93.98.4 <<EOF
+# docker stop node-container || true
+# docker rm node-container || true
+# docker pull surbhi800/my-node-app:latest
+# docker run -d --name node-container -p 3000:3000 surbhi800/my-node-app:latest
+# EOF
 
-#                     docker stop node-container || true
-#                     docker rm node-container || true
-#                     docker rmi $(docker images -q) || true
-
-#                     docker run -d --name node-container -p 3000:3000 surbhi800/my-node-app:latest
-#                     EOF
 #                     '''
 #                 }
 #             }
